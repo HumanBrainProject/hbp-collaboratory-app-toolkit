@@ -1,0 +1,18 @@
+language: node_js
+node_js: 0.10
+env:
+  - secure: "h+UCm4q1YJOco+otu56HEHhvwhLoCdAO+B9aaZa6DbxOAzOt3XrzwD7osThcy3BXQuFZKib9bKns6p/MbPTsKSMaCQfmyBIq/al2RCEy3dfq8pn6RfzZWTNd/tC36NySbYwXg+q8Ruvc/58LTJMt9lKSYeUXL1OJozWRXlT7TUKPyJJ/gyx5MCtUYs0mzi3qFR6/uk4nFxyIBiFCY1YVP6dJkl76HvvnAvVymxxFsR0oaR4w5w1y+W0pwCBZGoejERrE5UL3VJS/P8CIPVGx+bzugbdq4LNK//vk4nxeHv1uBLuhvCLv8beqQR8njUBf0sD8zuJQF9DEGKQ0KAMvJqjlFIeOeUxPaGu37D29NBU3FrsGp8U9MgjNV8hFdVhMiPCJXcv1DtxuhjvYYf7y50YDGZsoATJ6pan1kHZQM9++qwbt6iWMM3hRS2oa0JcqDNHLCDXh25WY9nlNucMVpUhXTbyZMs+4X/S4czBxurp5FnuME7DCew1GXBw4Zovn+NQl7qkgCUvSN/MWZlFYQXwBKv9xLwLd43oth8UbH801vTRhh+cs0vW8KM8ufYMmYm5DNf2fC3buA8ilDhFteLknCcGNp2n3ACynsLr6UFQPDH9yxVyC2RM7HcSVMpff2ks5upXKKurFbll1z9PWXgRFSawlqZ9WePbrOsfPNQg="
+before_install:
+  - npm install -g grunt-cli bower
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+install: npm install && bower install
+deploy:
+  provider: releases
+  api_key:
+    secure: b7Z8p41vWj4mU7kz6gQ/vvVEMmfAQ79sfKSekIK+5I/yFVe/JQjU/Hy40ygr9LE0sIZUvFQySg29/WaaKAVNYqLcFFs5fOLpzx7BvasbGZNFVLsKLb5Ubk+kIQuGL/c5cHXyXPmG45D0Q0MtvuSS9+eA5Q1ixwh2X2gyVOt6ZUrixRnYBJ8Wq1QnUwGLM4g5zpefGwT2pUqhX7TyAIr8zYWAjDsu8/D8dm7PreF3ayqbk9HV3ktmkenNRcs5eaNvwxBx/0oSm70Go6eDP6vIgG+UrWCFiTdjOWJ6+GlPSdtiNzYM6pV/7YvzNjO0fTvCovlOnJgTa+iITz4Uk9hoz1Y/XdH1mcTGWC2eOp7KenjDPUGEU7Ub9rVYrumaf2kSYEsEHhv1zTpw1HjOcYEtnQL0oTZDGz5+ZbZLOPeSnxW/FwFt1h5mIJn/Cy6jA/iPXeQfiJ0z4IydXrq3f4qgjmY4cPTcZR61vor+dM5ZIli4HvLsC2mgMlIkfcn/ym9FkpVPkA1yK1p7AcWL2/oG2KqlaaHWauIIevupTsr5kYSCSb+UhxXWcyBgJ3Xs5vPJpYOqHEfbre2ypqtP89nmgLSm+w4Tb3yc/MABS/OguH4udnxgIBGUqfJJeGod60t2auitLsU0juJbAPJMbbbt8YSiL54K6445Z3vi5ecpzJM=
+  file: dist/hbp-collaboratory-app-toolkit.zip
+  on:
+    tags: true
+    repo: HumanBrainProject/hbp-collaboratory-app-toolkit
+  skip_cleanup: true
