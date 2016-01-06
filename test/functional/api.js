@@ -75,24 +75,9 @@ module.exports = {
     browser
       .url(browser.launch_url + '/api.html')
       .waitForElementVisible('body', 1000)
-      .execute(function() {
-        window.addEventListener('message', function(event) {
-          if (event.data && event.data.eventName === 'workspace.getContext') {
-            document.getElementById('app').contentWindow.postMessage({
-              apiVersion: 1,
-              eventName: 'resolved',
-              origin: event.data.ticket,
-              data: {
-                ctx: '123a-456aaaa-bbbbbbbbbbbb',
-                state: 'lorem ipsum',
-                mode: 'run'
-              }
-            }, '*');
-          }
-        });
-      })
+      .execute(stubGetContextMessage)
       .frame('app')
-      .timeoutsAsyncScript(1000)
+      .timeoutsAsyncScript(200)
       .executeAsync(function(done) {
         require(['hbp-collaboratory-app-toolkit'], function(tk) {
           try {
@@ -106,6 +91,30 @@ module.exports = {
       }, [], function(result) {
         this.verify.ok(result.value.ctx === '123a-456aaaa-bbbbbbbbbbbb', 'invalid ctx' + JSON.stringify(result.value));
         this.verify.ok(result.value.state === 'lorem ipsum', 'invalid state' + JSON.stringify(result.value));
+        this.verify.ok(result.value.mode === 'run', 'invalid mode' + JSON.stringify(result.value));
+      })
+  },
+
+  'api.context(data, callback) set the state': function(browser) {
+    browser
+      .url(browser.launch_url + '/api.html')
+      .waitForElementVisible('body', 1000)
+      .execute(stubGetContextMessage)
+      .frame('app')
+      .timeoutsAsyncScript(200)
+      .executeAsync(function(done) {
+        require(['hbp-collaboratory-app-toolkit'], function(tk) {
+          try {
+            tk.context({state: 'idor solor'}, function(err, context) {
+              done(err || context);
+            })
+          } catch(ex) {
+            done(ex);
+          }
+        });
+      }, [], function(result) {
+        this.verify.ok(result.value.ctx === '123a-456aaaa-bbbbbbbbbbbb', 'invalid ctx' + JSON.stringify(result.value));
+        this.verify.ok(result.value.state === 'idor solor', 'invalid state' + JSON.stringify(result.value));
         this.verify.ok(result.value.mode === 'run', 'invalid mode' + JSON.stringify(result.value));
       })
   }
@@ -127,6 +136,29 @@ function echoMessage(){
         eventName: 'resolved',
         origin: event.data.ticket,
         data: event.data
+      }, '*');
+    }
+  });
+}
+
+function stubGetContextMessage() {
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.eventName === 'workspace.getContext') {
+      var value = {
+        ctx: '123a-456aaaa-bbbbbbbbbbbb',
+        state: 'lorem ipsum',
+        mode: 'run'
+      };
+
+      if (event.data.data) {
+        value.state = event.data.data.state;
+      }
+
+      document.getElementById('app').contentWindow.postMessage({
+        apiVersion: 1,
+        eventName: 'resolved',
+        origin: event.data.ticket,
+        data: value
       }, '*');
     }
   });
