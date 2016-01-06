@@ -77,7 +77,7 @@ module.exports = {
       .waitForElementVisible('body', 1000)
       .execute(function() {
         window.addEventListener('message', function(event) {
-          if (event.data && event.data.eventName === 'context') {
+          if (event.data && event.data.eventName === 'workspace.getContext') {
             document.getElementById('app').contentWindow.postMessage({
               apiVersion: 1,
               eventName: 'resolved',
