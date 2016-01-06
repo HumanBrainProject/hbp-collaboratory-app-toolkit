@@ -1,13 +1,29 @@
 {
   "name": "hbp-collaboratory-app-toolkit",
+  "description": "A Javascript toolkit to interface a web application with the HBP Collaboratory",
   "version": "0.0.0",
-  "private": true,
+  "main": ["dist/hbp-collaboratory-app-toolkit.js"],
+  "moduleType": [
+    "amd",
+    "globals",
+    "angular"
+  ],
+  "keywords": [
+    "HumanBrainProject",
+    "Collaboratory",
+    "toolkit",
+    "helper"
+  ],
+  "authors": [
+    "Olivier Amblet <olivier.amblet@epfl.ch>"
+  ],
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "reports"
   ],
   "devDependencies": {
     "requirejs": "~2.1.19",
