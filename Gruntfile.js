@@ -22,7 +22,8 @@ module.exports = function(grunt) {
     'nightwatch': require('./grunt/nightwatch')(grunt),
     'connect': require('./grunt/connect'),
     'bump': require('./grunt/bump'),
-    'exec': require('./grunt/exec')
+    'exec': require('./grunt/exec'),
+    'jsdoc': require('./grunt/jsdoc')
   });
 
   require('./grunt/ssh-remote-tunneling')(grunt);

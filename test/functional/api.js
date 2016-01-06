@@ -70,16 +70,35 @@ module.exports = {
       })
       .end();
   },
-  'api.ctx contains the context': function(browser) {
+
+  'api.context(callback) contains the context': function(browser) {
     browser
       .url(browser.launch_url + '/api.html')
       .waitForElementVisible('body', 1000)
+      .execute(function() {
+        window.addEventListener('message', function(event) {
+          if (event.data && event.data.eventName === 'context') {
+            document.getElementById('app').contentWindow.postMessage({
+              apiVersion: 1,
+              eventName: 'resolved',
+              origin: event.data.ticket,
+              data: {
+                ctx: '123a-456aaaa-bbbbbbbbbbbb',
+                state: 'lorem ipsum',
+                mode: 'run'
+              }
+            }, '*');
+          }
+        });
+      })
       .frame('app')
       .timeoutsAsyncScript(1000)
       .executeAsync(function(done) {
         require(['hbp-collaboratory-app-toolkit'], function(tk) {
           try {
-            done(tk.context());
+            tk.context(function(err, context) {
+              done(err || context);
+            })
           } catch(ex) {
             done(ex);
           }
@@ -87,6 +106,7 @@ module.exports = {
       }, [], function(result) {
         this.verify.ok(result.value.ctx === '123a-456aaaa-bbbbbbbbbbbb', 'invalid ctx' + JSON.stringify(result.value));
         this.verify.ok(result.value.state === 'lorem ipsum', 'invalid state' + JSON.stringify(result.value));
+        this.verify.ok(result.value.mode === 'run', 'invalid mode' + JSON.stringify(result.value));
       })
   }
 };
