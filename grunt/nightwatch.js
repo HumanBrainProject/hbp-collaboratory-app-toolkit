@@ -4,8 +4,6 @@ var nightwatchConfig = function() {
   return {
     options: {
       'standalone': true,
-      'jar_path': 'test/selenium-server-standalone-' + jarVersion + '.jar',
-      'jar_version': jarVersion,
 
       // 'selenium_host': 'ondemand.saucelabs.com',
       // 'selenium_port': '80'
