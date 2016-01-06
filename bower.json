@@ -1,7 +1,7 @@
 {
   "name": "hbp-collaboratory-app-toolkit",
   "description": "A Javascript toolkit to interface a web application with the HBP Collaboratory",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": ["dist/hbp-collaboratory-app-toolkit.js"],
   "moduleType": [
     "amd",
