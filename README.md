@@ -1,6 +1,6 @@
 # hbp-collaboratory-app-toolkit
 
-![Build Status](https://travis-ci.org/HumanBrainProject/hbp-collaboratory-app-toolkit.svg?branch=master)
+[![Build Status](https://travis-ci.org/HumanBrainProject/hbp-collaboratory-app-toolkit.svg?branch=master)](https://travis-ci.org/HumanBrainProject/hbp-collaboratory-app-toolkit)
 
 A Javascript toolkit to interface a web application with the HBP Collaboratory.
 
