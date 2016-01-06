@@ -143,7 +143,7 @@ function echoMessage(){
 
 function stubGetContextMessage() {
   window.addEventListener('message', function(event) {
-    if (event.data && event.data.eventName === 'workspace.getContext') {
+    if (event.data && event.data.eventName === 'workspace.context') {
       var value = {
         ctx: '123a-456aaaa-bbbbbbbbbbbb',
         state: 'lorem ipsum',
