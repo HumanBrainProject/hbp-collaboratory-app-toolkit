@@ -6,10 +6,9 @@
   </head>
   <body>
     <h1>OutterFrame</h1>
-    <iframe src="api-app.html?ctx=123a-456aaaa-bbbbbbbbbbbb&amp;ctxstate=lorem%20ipsum" id="app"></iframe>
+    <iframe src="api-app.html?ctx=123a-456aaaa-bbbbbbbbbbbb" id="app"></iframe>
     <div id="messages"></div>
     <script type="text/javascript">
-      console.log('STARTING');
       window.addEventListener('message', function(evt) {
         var div = document.createElement('DIV');
         div.id = 'message-' + evt.data.ticket;
