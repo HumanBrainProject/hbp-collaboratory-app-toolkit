@@ -30,8 +30,5 @@
     "matchdep": "~1.0.0",
     "nightwatch": "^0.8.14",
     "pty": "^0.0.0"
-  },
-  "dependencies": {
-    "grunt-jsdoc": "^1.1.0"
   }
 }
