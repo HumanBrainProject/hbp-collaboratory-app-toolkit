@@ -5,3 +5,5 @@ components
 /dist
 *.log
 reports/
+
+*.jar
