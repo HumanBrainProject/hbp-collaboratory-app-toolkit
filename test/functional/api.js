@@ -83,7 +83,7 @@ module.exports = {
           try {
             tk.context(function(err, context) {
               done(err || context);
-            })
+            });
           } catch(ex) {
             done(ex);
           }
@@ -92,7 +92,7 @@ module.exports = {
         this.verify.ok(result.value.ctx === '123a-456aaaa-bbbbbbbbbbbb', 'invalid ctx' + JSON.stringify(result.value));
         this.verify.ok(result.value.state === 'lorem ipsum', 'invalid state' + JSON.stringify(result.value));
         this.verify.ok(result.value.mode === 'run', 'invalid mode' + JSON.stringify(result.value));
-      })
+      });
   },
 
   'api.context(data, callback) set the state': function(browser) {
@@ -107,7 +107,7 @@ module.exports = {
           try {
             tk.context({state: 'idor solor'}, function(err, context) {
               done(err || context);
-            })
+            });
           } catch(ex) {
             done(ex);
           }
@@ -116,7 +116,24 @@ module.exports = {
         this.verify.ok(result.value.ctx === '123a-456aaaa-bbbbbbbbbbbb', 'invalid ctx' + JSON.stringify(result.value));
         this.verify.ok(result.value.state === 'idor solor', 'invalid state' + JSON.stringify(result.value));
         this.verify.ok(result.value.mode === 'run', 'invalid mode' + JSON.stringify(result.value));
-      })
+      });
+  },
+  'api.context(data, null) set the state and does not rais error': function(browser) {
+    browser
+      .url(browser.launch_url + '/api.html')
+      .waitForElementVisible('body', 1000)
+      .execute(stubGetContextMessage)
+      .frame('app')
+      .timeoutsAsyncScript(200)
+      .executeAsync(function(done) {
+        require(['hbp-collaboratory-app-toolkit'], function(tk) {
+          try {
+            tk.context({state: 'idor solor'});
+          } catch(ex) {
+            done(ex);
+          }
+        });
+      });
   }
 };
 
