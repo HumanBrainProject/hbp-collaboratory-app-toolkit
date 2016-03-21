@@ -20,6 +20,34 @@ bower install hbp-collaboratory-app-toolkit
 You can also download a [release](https://github.com/HumanBrainProject/hbp-collaboratory-app-toolkit/releases), uncompress the archive and use the file located in the `./dist` folder.
 
 
+# Usage
+
+## Vanilla Javascript
+
+Retrieve the current context.
+
+```js
+window.hbpCollaboratoryAppToolkit.context(function(err, context) {
+  if (err) {
+    // No context can be retrieved
+  } else {
+    console.log(context.ctx, context.state, context.collab);
+  }
+});
+```
+
+Set the current state in order for a user to be able to copy-paste its current URL and reopen the same collab with your app loaded at the same place.
+
+```js
+window.hbpCollaboratoryAppToolkit.context(function(err, context) {
+  if (err) {
+    // Cannot set the state
+  } else {
+    console.log(context.ctx, context.state, context.collab);
+  }
+});
+
+
 # Development
 
 Clone the repository using git:
