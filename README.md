@@ -46,6 +46,7 @@ window.hbpCollaboratoryAppToolkit.context(function(err, context) {
     console.log(context.ctx, context.state, context.collab);
   }
 });
+```
 
 
 # Development
